@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表單課堂練習</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mycss.css">
+    <style>
+        .demo01 {
+            border: 2px solid var(--mycolor008);
+        }
+
+        .showmsg {
+            width: 280px;
+            height: auto;
+            padding: 20px;
+            border: 2px solid var(--mycolor008);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-2 demo01 p-3">
+                <div class="mb-3">
+                    <label for="username">帳號</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="帳號字數5~10字!">
+                </div>
+                <div class="mb-3">
+                    <label for="password">密碼</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="密碼字數3~10字!">
+                </div>
+                <div class="mb-3">
+                    <label for="repassword">確認密碼</label>
+                    <input type="password" class="form-control" id="repassword" name="repassword" placeholder="再次輸入密碼!">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="email字數5~10字!">
+                </div>
+                <div class="mb-3">
+                    <label for="bday">生日</label>
+                    <input type="date" class="form-control" id="bday" name="bday">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label" id="age_text">?????年齡(必須成年>18)</label>
+                    <input type="range" class="form-range" id="age" name="age" min="1" max="80">
+                </div>
+                <div class="mb-3">
+                    <label for="select_edu">最高學歷</label>
+                    <select name="select_edu" id="select_edu" class="form-select">
+                        <option value="碩士">碩士</option>
+                        <option value="大學(專)">大學(專)</option>
+                        <option value="高中(職)">高中(職)</option>
+                        <option value="其它">其它</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <div class="fs-3">興趣</div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="" name="myinterest" value="運動">
+                        <label for="" class="form-check-label">運動</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="" name="myinterest" value="閱讀">
+                        <label for="" class="form-check-label">閱讀</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="" name="myinterest" value="電影">
+                        <label for="" class="form-check-label">電影</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="" name="myinterest" value="睡覺">
+                        <label for="" class="form-check-label">睡覺</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <div class="fs-3">血型</div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="" name="blood" value="AB型">
+                            <label for="" class="form-check-label">AB型</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="" name="blood" value="A型">
+                            <label for="" class="form-check-label">A型</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="" name="blood" value="B型">
+                            <label for="" class="form-check-label">B型</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="" name="blood" value="O型">
+                            <label for="" class="form-check-label">O型</label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100" id="ok_btn">確認</button>
+                <div class="showmsg my-3"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.6.4.min.js"></script>
+    <script>
+        $(function () {
+            $("#age").change(function () {
+                $("#age_text").html("年齡:" + $(this).val() + "歲")
+            });
+
+            $("#ok_btn").click(function () {
+                //興趣 複選
+                var interest = [];
+                $.each($("input[name='myinterest']:checked"), function () {
+                    interest.push($(this).val());
+                });
+
+                //血型 單選
+                var myblood = [];
+                $.each($("input[name='blood']:checked"), function () {
+                    myblood.push($(this).val());
+                });
+
+                console.log($("#username").val());
+                $(".showmsg").html('<h2>帳號: ' + $("#username").val() + '</h2><h2>密碼: ' + $("#password").val() + '</h2><h2>生日: ' + $("#bday").val() + '</h2><h2>年齡:' + $("#age").val() + '歲</h2><h2>最高學歷: ' + $("#select_edu").val() + '</h2><h2>興趣: ' + interest.join('/') + '</h2><h2>血型: ' + myblood +'</h2>');
+            });
+        });
+    </script>
+</body>
+
+</html>
